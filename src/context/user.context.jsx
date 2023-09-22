@@ -16,7 +16,6 @@ const INITIAL_STATE = {
 };
 
 const userReducer = (state, action) => {
-  console.log(action)
   // this is the reducer function, it takes in the current state and an action. Action has a type and a payload
   const { type, payload } = action;
 
@@ -35,7 +34,6 @@ const userReducer = (state, action) => {
 export const UserProvider = ({ children }) => {
   // destructure the state => { currentUser } and dispatch (is a function call) from the reducer
   const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
-  console.log("currentUser", currentUser)
   const setCurrentUser = (user) => {
     dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
   };
