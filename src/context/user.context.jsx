@@ -1,16 +1,13 @@
 import {createContext, useEffect, useReducer} from "react";
 import {createUserDocumentFromAuth, onAuthStateChangedListener,} from "../utils/firebase/firebase.utils";
 import {createAction} from "../utils/reducer/reducer.utils";
+import {USER_ACTION_TYPES} from "../store/user/user.types";
 
 // as actual value we want to access the user object
 export const UserContext = createContext({
   currentUser: () => null,
   setCurrentUser: () => null,
 });
-
-export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: "SET_CURRENT_USER",
-};
 
 const INITIAL_STATE = {
   currentUser: null,
