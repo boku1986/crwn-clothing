@@ -8,13 +8,16 @@ import thunk from "redux-thunk";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["user"],
+  whitelist: ["cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 //middleware
-const middlewares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(
+const middlewares = [
+  process.env.NODE_ENV !== "production" && logger,
+  thunk,
+].filter(
   Boolean // this way we filter out anything that is not true
 );
 
