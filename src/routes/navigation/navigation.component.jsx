@@ -1,10 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
-import { useContext } from "react";
 import { signOutAuthUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../context/cart.context";
 import {
   LogoContainer,
   NavigationContainer,
@@ -13,12 +11,12 @@ import {
 } from "./navigation.styles";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectIsCartOpen } from "../../store/cart/cart.selectors";
 
 const Navigation = () => {
-  // const { currentUser } = useContext(UserContext);
   // hook that we pass selector function to, we get back the entire state object and we can pull off the user
   const currentUser = useSelector(selectCurrentUser);
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     <>
@@ -31,7 +29,7 @@ const Navigation = () => {
             SHOP
           </NavLink>
           {currentUser ? (
-            <NavLink as="span" onClick={signOutAuthUser}>
+            <NavLink as="span" onClick={signOutAuthUser} to='/shop'>
               SIGN OUT
             </NavLink>
           ) : (
