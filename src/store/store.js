@@ -40,9 +40,8 @@ const middlewares = [process.env.NODE_ENV === "development" && logger].filter(
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false,
-  }).concat(middlewares), // we can override the default middleware (3 of them) by passing our own
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middlewares), // we can override the default middleware (3 of them) by passing our own
 });
 //
 // sagaMiddleware.run(rootSaga);
