@@ -8,7 +8,6 @@ export const toggleIsCartOpen = () =>
   createAction(CART_ACTION_TYPES.TOGGLE_CART_OPEN);
 
 const addCartItem = (cartItems, productToAdd) => {
-  console.log(cartItems);
   // find if cart items contains the product to add
   const existingCartItem = cartItems.find(
     (item) => item.id === productToAdd.id
