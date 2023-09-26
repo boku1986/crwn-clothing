@@ -8,13 +8,13 @@ import {
 import { useSelector } from "react-redux";
 import {
   selectCartItems,
-  selectTotalCost,
+  selectCartTotalCost,
 } from "../../store/cart/cart.selectors";
 import PaymentForm from "../../components/payment-form/payment-form.component";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
-  const totalCost = useSelector(selectTotalCost);
+  const totalCost = useSelector(selectCartTotalCost);
 
   return (
     <CheckoutPageContainer>
