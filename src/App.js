@@ -7,13 +7,14 @@ import Checkout from "./routes/checkout/checkout.component";
 import { getCurrentUser } from "./utils/firebase/firebase.utils";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { checkUserSession } from "./store/user/user.action";
 
 const App = () => {
   // actually the dispatch never changes, but we need to pass it as a dependency to useEffect to avoid a warning
   const dispatch = useDispatch();
   useEffect(() => {
     getCurrentUser().then((userAuth) => {
-      console.log("userAuth", userAuth);
+      dispatch(checkUserSession());
     });
   }, [dispatch]);
 
