@@ -4,25 +4,17 @@ import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-import {
-  createUserDocumentFromAuth,
-  onAuthStateChangedListener,
-} from "./utils/firebase/firebase.utils";
+import { getCurrentUser } from "./utils/firebase/firebase.utils";
 import { useEffect } from "react";
-import { setCurrentUser } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 
 const App = () => {
   // actually the dispatch never changes, but we need to pass it as a dependency to useEffect to avoid a warning
   const dispatch = useDispatch();
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener(async (user) => {
-      if (user) {
-        await createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
+    getCurrentUser().then((userAuth) => {
+      console.log("userAuth", userAuth);
     });
-    return unsubscribe;
   }, [dispatch]);
 
   return (

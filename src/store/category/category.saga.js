@@ -22,7 +22,7 @@ export function* onFetchCategories() {
   yield takeLatest(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START, fetchCategoriesAsync);
 }
 
-export function* categriesSaga() {
+export function* categoriesSaga() {
   // all - run everything inside and only complete when all of them are successful
   yield all([call(onFetchCategories)]);
 }
