@@ -9,6 +9,6 @@ yarn add firebase
 
 ```bash
 cd src/components
-take spinner
-touch spinner.component.jsx spinner.styles.jsx
+take payment-form
+touch payment-form.component.jsx payment-form.styles.jsx
 ```
