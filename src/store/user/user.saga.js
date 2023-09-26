@@ -3,6 +3,8 @@ import { USER_ACTION_TYPES } from "./user.types";
 import {
   signInFailure,
   signInSuccess,
+  signOutFailure,
+  signOutSuccess,
   signUpFailure,
   signUpSuccess,
 } from "./user.action";
@@ -12,6 +14,7 @@ import {
   getCurrentUser,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
+  signOutAuthUser,
 } from "../../utils/firebase/firebase.utils";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
@@ -78,6 +81,15 @@ export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
   yield call(getSnapshotFromUserAuth, user, additionalDetails);
 }
 
+export function* signOut() {
+  try {
+    yield call(signOutAuthUser);
+    yield put(signOutSuccess());
+  } catch (e) {
+    yield put(signOutFailure(e));
+  }
+}
+
 export function* onGoogleSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
@@ -94,6 +106,10 @@ export function* onSignUpSuccess() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
+export function* onSignOutStart() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
+}
+
 export function* onCheckUserSession() {
   yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
 }
@@ -105,5 +121,6 @@ export function* userSagas() {
     call(onEmailSignInStart),
     call(onSignUpStart),
     call(onSignUpSuccess),
+    call(onSignOutStart),
   ]);
 }
